@@ -1,0 +1,299 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.2",
+    "lastTouchedAt": "2026-03-07T14:18:58.449Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-07T13:48:47.836Z",
+    "lastRunVersion": "2026.3.2",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "headless": false,
+    "attachOnly": false
+  },
+  "auth": {
+    "profiles": {
+      "cliproxyapi:default": {
+        "provider": "cliproxyapi",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "providers": {
+      "cliproxyapi": {
+        "baseUrl": "http://127.0.0.1:8317/v1",
+        "apiKey": "REDACTED",
+        "api": "openai-responses",
+        "models": [
+          {
+            "id": "gpt-5",
+            "name": "GPT-5",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5-codex",
+            "name": "GPT-5 Codex",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5-codex-mini",
+            "name": "GPT-5 Codex Mini",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.1",
+            "name": "GPT-5.1",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.1-codex",
+            "name": "GPT-5.1 Codex",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.1-codex-mini",
+            "name": "GPT-5.1 Codex Mini",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.1-codex-max",
+            "name": "GPT-5.1 Codex Max",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.2",
+            "name": "GPT-5.2",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.2-codex",
+            "name": "GPT-5.2 Codex",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.3-codex",
+            "name": "GPT-5.3 Codex",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.3-codex-spark",
+            "name": "GPT-5.3 Codex Spark",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          },
+          {
+            "id": "gpt-5.4",
+            "name": "GPT-5.4",
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1000000,
+            "maxTokens": 64000
+          }
+        ]
+      },
+      "openrouter": {
+        "baseUrl": "http://127.0.0.1:8317/v1",
+        "apiKey": "REDACTED",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "step-3.5-flash",
+            "name": "Step-3.5 Flash",
+            "input": [
+              "text"
+            ],
+            "contextWindow": 200000,
+            "maxTokens": 32000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "cliproxyapi/gpt-5.4",
+        "fallbacks": [
+          "cliproxyapi/gpt-5.4",
+          "cliproxyapi/gpt-5.3-codex-spark"
+        ]
+      },
+      "models": {
+        "cliproxyapi/gpt-5": {},
+        "cliproxyapi/gpt-5-codex": {},
+        "cliproxyapi/gpt-5-codex-mini": {},
+        "cliproxyapi/gpt-5.1": {},
+        "cliproxyapi/gpt-5.1-codex": {},
+        "cliproxyapi/gpt-5.1-codex-mini": {},
+        "cliproxyapi/gpt-5.1-codex-max": {},
+        "cliproxyapi/gpt-5.2": {},
+        "cliproxyapi/gpt-5.2-codex": {},
+        "cliproxyapi/gpt-5.3-codex": {},
+        "cliproxyapi/gpt-5.3-codex-spark": {},
+        "cliproxyapi/gpt-5.4": {}
+      },
+      "workspace": "/home/babyhack8x/.openclaw/workspace",
+      "compaction": {
+        "reserveTokensFloor": 100000,
+        "memoryFlush": {
+          "enabled": false
+        }
+      },
+      "bootstrapMaxChars": 15000,
+      "bootstrapTotalMaxChars": 50000
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "model": "cliproxyapi/gpt-5.4"
+      },
+      {
+        "id": "Admin",
+        "model": "cliproxyapi/gpt-5.4"
+      },
+      {
+        "id": "Staff",
+        "model": "cliproxyapi/gpt-5.4"
+      }
+    ]
+  },
+  "tools": {
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "*"
+      ]
+    }
+  },
+  "bindings": [],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "maintenance": {
+      "mode": "enforce",
+      "pruneAfter": "1d",
+      "maxEntries": 100,
+      "rotateBytes": "5mb"
+    }
+  },
+  "cron": {
+    "sessionRetention": "24h"
+  },
+  "hooks": {
+    "enabled": false,
+    "mappings": []
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "REDACTED",
+      "allowFrom": [
+        5742018098
+      ],
+      "groupPolicy": "allowlist",
+      "streaming": "partial"
+    },
+    "openzalo": {
+      "enabled": false,
+      "actions": {
+        "messages": true,
+        "reactions": true
+      },
+      "dmPolicy": "open",
+      "groupMentionDetectionFailure": "allow",
+      "groupPolicy": "open",
+      "groupRequireMention": true,
+      "allowFrom": [
+        "*"
+      ]
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "REDACTED"
+    }
+  },
+  "plugins": {
+    "allow": [
+      "telegram"
+    ],
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "openzalo": {
+        "enabled": false
+      }
+    }
+  }
+}
