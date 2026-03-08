@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto-sync OpenClaw config backup to GitHub
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/babyhack8x/dev/Applio/scripts/openclaw_config_autosync.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

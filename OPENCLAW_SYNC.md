@@ -8,7 +8,7 @@ Local files can sync:
 - `~/.openclaw/agents/main/agent/models.json`
 - khi can, cap nhat them `openclaw_baoan_memory/AGENTS.memory.md` neu huong dan memory thay doi
 
-Quy trinh bat buoc sau moi thay doi config:
+Quy trinh thu cong sau moi thay doi config:
 
 ```bash
 python3 /home/babyhack8x/dev/Applio/scripts/sync_openclaw_config.py
@@ -22,3 +22,23 @@ Quy tac:
 - khong commit secret thuan van; script da redact cac khoa nhu `apiKey`, `botToken`, `token`, `secret`
 - neu thay doi them cac file huong dan trong workspace, copy sang repo truoc khi commit
 - neu khong co thay doi sau khi sync, khong tao commit rong
+
+## Tu dong dong bo
+
+Da co watcher local qua systemd user service:
+
+- service: `openclaw-config-autosync.service`
+- script watcher: `scripts/openclaw_config_autosync.py`
+
+Khi `~/.openclaw/openclaw.json` hoac `~/.openclaw/agents/main/agent/models.json` thay doi, watcher se tu dong:
+
+1. chay sanitize backup
+2. commit voi message `Auto-sync OpenClaw config backup`
+3. push len `origin/main`
+
+Lenh kiem tra:
+
+```bash
+systemctl --user status openclaw-config-autosync.service
+journalctl --user -u openclaw-config-autosync.service -n 50 --no-pager
+```
