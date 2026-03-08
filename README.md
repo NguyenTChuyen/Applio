@@ -2,15 +2,16 @@
 
 BiAnCoXua
 
-## OpenClaw BM25 Memory
+## OpenClaw BaoAn Memory
 
-This repository now includes an `openclaw_bm25/` package containing a Vietnamese-first BM25 memory workflow for OpenClaw.
+This repository now includes an `openclaw_baoan_memory/` package containing a Vietnamese-first BaoAn Memory workflow for OpenClaw.
 
 Included files:
 
-- `openclaw_bm25/bm25_memory.py` - BM25 memory engine with duplicate merge, phrase-aware ranking, token-budget context, and query intent hints
-- `openclaw_bm25/SKILL.md` - OpenClaw skill instructions standardized on BM25
-- `openclaw_bm25/AGENTS.memory.md` - AGENTS memory section updated to prefer BM25 over legacy memory systems
+- `openclaw_baoan_memory/baoan-memory.py` - BaoAn Memory engine with lifecycle controls, duplicate merge, phrase-aware ranking, token-budget context, flush/precompact, pinned/archive, and query intent hints
+- `openclaw_baoan_memory/SKILL.md` - OpenClaw skill instructions standardized on `baoan-memory`
+- `openclaw_baoan_memory/AGENTS.memory.md` - AGENTS memory section updated to prefer BaoAn Memory over legacy systems
+- `openclaw_baoan_memory/TOOLS.memory.md` - workspace tool notes aligned to BaoAn Memory
 
 Goals:
 
@@ -18,3 +19,4 @@ Goals:
 - faster retrieval
 - better Vietnamese recall for accented and unaccented queries
 - lower OpenClaw token usage by reducing irrelevant context
+- cleaner lifecycle management for recent, curated, pinned, and archived memory

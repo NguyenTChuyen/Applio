@@ -1,21 +1,21 @@
 ---
-name: bm25_memory
-description: BM25S Memory - Fast keyword-based memory for AI Agents. Sử dụng BM25 algorithm cho tìm kiếm nhanh (50ms) thay vì vector embedding (2s).
+name: baoan-memory
+description: BaoAn Memory - BM25-first memory lifecycle for OpenClaw. Tìm nhanh, context gọn, ưu tiên memory tiếng Việt và facts quan trọng.
 metadata:
   {
     "openclaw": { "emoji": "⚡", "requires": { "exec": true } },
   }
 ---
 
-# ⚡ BM25S Memory
+# ⚡ BaoAn Memory
 
 **Nhanh hơn 30x so với vector embedding!**
 
 ## ⚠️ QUAN TRỌNG - SỬ DỤNG SKILL NÀY
 
-**KHÔNG sử dụng openmemory cũ (dùng vector embedding chậm). Sử dụng skill này cho TẤT CẢ các tác vụ memory.**
+**KHÔNG sử dụng openmemory cũ (dùng vector embedding chậm). Sử dụng `baoan-memory` cho TẤT CẢ các tác vụ memory.**
 
-## 🚀 BM25 v2.1 - NGUYÊN TẮC MỚI
+## 🚀 BaoAn Memory - NGUYÊN TẮC MỚI
 
 - Ưu tiên **lưu trữ thông minh**: tự merge memory gần giống, tránh trùng lặp
 - Ưu tiên **tìm nhanh và chính xác** cho tiếng Việt có dấu và không dấu
@@ -202,17 +202,17 @@ python <script> <command> <content> [category] [importance]
 
 ### 1. THÊM MEMORY (ADD):
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "NỘI DUNG" category importance
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "NỘI DUNG" category importance
 ```
 
 **Ví dụ:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
 ```
 
 ### 2. TÌM KIẾM (SEARCH) - LUÔN DÙNG TỪ KHÓA NGẮN:
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "TỪ KHÓA" [limit] [threshold_mode]
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "TỪ KHÓA" [limit] [threshold_mode]
 ```
 
 - `limit`: mặc định `5`, tối đa `5`
@@ -230,12 +230,30 @@ Ví dụ:
 
 ### 3. LẤY CONTEXT:
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context [limit] [max_tokens]
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py context [limit] [max_tokens] [mode]
 ```
 
 - `limit`: mặc định `3`
 - `max_tokens`: mặc định `180`
+- `mode`: `balanced`, `facts`, `recent`, `project`
 - context sẽ ưu tiên memory quan trọng hơn và dừng theo budget token
+
+### 4. VÒNG ĐỜI MEMORY:
+```
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py flush "NỘI DUNG"
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py precompact "NỘI DUNG"
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py promote
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py archive [days]
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py maintain [archive_days]
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py state
+```
+
+- `flush`: xả memory ngắn trước compaction
+- `precompact`: flush + promote + build facts context
+- `promote`: nâng `recent` thành `curated`
+- `archive`: cất memory cũ ra khỏi đường recall chính
+- `maintain`: chạy cleanup/promote/archive/summaries
+- `state`: xem lifecycle state
 
 ## 🎯 THRESHOLD MODES
 
@@ -275,7 +293,7 @@ python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context [limit
 
 **Phải gọi ngay:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "API key: sk-or-v1-xxx" api 1.0
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "API key: sk-or-v1-xxx" api 1.0
 ```
 
 ### Ví dụ 2: User chia sẻ sản phẩm Rạng Đông
@@ -283,7 +301,7 @@ python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "API key: 
 
 **Phải gọi ngay:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Đèn LED Rạng Đông - Công nghệ SunLike" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "Đèn LED Rạng Đông - Công nghệ SunLike" product 0.8
 ```
 
 ### Ví dụ 3: User chia sẻ ống nước Tiền Phong
@@ -291,7 +309,7 @@ python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Đèn LED
 
 **Phải gọi ngay:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Ống PPR Tiền Phong - DN25 - Màu xanh" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "Ống PPR Tiền Phong - DN25 - Màu xanh" product 0.8
 ```
 
 ### Ví dụ 4: User chia sẻ sở thích
@@ -299,7 +317,7 @@ python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Ống PPR
 
 **Phải gọi ngay:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "User thích đèn LED warm white 3000K" preference 0.7
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "User thích đèn LED warm white 3000K" preference 0.7
 ```
 
 ---
@@ -324,13 +342,13 @@ exec:...memory.py search "từ khóa" product
 
 ```
 # Add: python <script> add "content" category importance
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "nội dung" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "nội dung" product 0.8
 
 # Search: python <script> search "từ khóa" 5 balanced
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "từ khóa" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "từ khóa" 5 balanced
 
 # Context: python <script> context 3 180
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context 3 180
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py context 3 180
 ```
 
 ---

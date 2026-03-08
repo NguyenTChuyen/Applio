@@ -124,9 +124,9 @@ You wake up fresh each session. These files are your continuity:
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
-### 🧠 Memory System (BM25 Memory)
+### 🧠 Memory System (BaoAn Memory)
 
-**⚠️ QUAN TRỌNG: Sử dụng `bm25_memory` cho TẤT CẢ các tác vụ memory!**
+**⚠️ QUAN TRỌNG: Sử dụng skill `baoan-memory` cho TẤT CẢ các tác vụ memory!**
 
 **KHÔNG sử dụng `openmemory`, `baoan-rag`, hoặc `vector-search.sh` cho memory thường ngày.**
 
@@ -134,25 +134,31 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 ```
 # Thêm memory mới
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "NỘI DUNG GHI NHỚ" category importance
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "NỘI DUNG GHI NHỚ" category importance
 
 # Tìm kiếm (LUÔN dùng từ khóa ngắn 2-5 từ)
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "từ khóa" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "từ khóa" 5 balanced
 
 # Xem context
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context 3 180
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py context 3 180 facts
+
+# Chuẩn bị trước compaction
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py precompact "NỘI DUNG CẦN GIỮ"
+
+# Bảo trì vòng đời memory
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py maintain 45
 ```
 
 **Ví dụ:**
 ```
 # Ghi nhớ thông tin sản phẩm
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
 
 # Tìm kiếm
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "đèn led" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "đèn led" 5 balanced
 
 # Ghi nhớ thông tin API
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "API key: sk-or-v1-xxx" api 1.0
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "API key: sk-or-v1-xxx" api 1.0
 ```
 
 **Categories:** product, api, preference, conversation, other
@@ -169,25 +175,36 @@ python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "API key: 
 
 1. **Dùng BM25 search (giới hạn 5 kết quả mặc định, rất nhanh):**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "từ khóa" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "từ khóa" 5 balanced
 ```
 
 2. **Khi muốn siết precision hơn, dùng `strict`:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "từ khóa" 5 strict
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "từ khóa" 5 strict
 ```
 
 3. **Phân trang/history khi cần xem lại memory:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py history 10 5
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py history 10 5
 ```
 
-4. **Xem context theo budget token:**
+4. **Xem context theo budget token và mode:**
 ```
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context 3 180
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py context 3 180 facts
 ```
 
-5. **Fallback đọc MEMORY.md:**
+5. **Trước khi compaction hoặc khi vừa chốt thông tin quan trọng:**
+```
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py precompact "nội dung cần giữ"
+```
+
+6. **Bảo trì lifecycle định kỳ:**
+```
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py maintain 45
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py state
+```
+
+7. **Fallback đọc MEMORY.md:**
    - If search returns nothing, manually read MEMORY.md
    - Use tool: `read:/home/babyhack8x/.openclaw/workspace/MEMORY.md`
 
@@ -417,25 +434,25 @@ Think of it like a human reviewing their journal and updating their mental model
 **Cú pháp:**
 ```
 # Thêm memory mới
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "NỘI DUNG GHI NHỚ" category importance
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "NỘI DUNG GHI NHỚ" category importance
 
 # Tìm kiếm (LUÔN dùng từ khóa ngắn 2-5 từ)
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "từ khóa" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "từ khóa" 5 balanced
 
 # Xem context
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py context 3 180
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py context 3 180
 ```
 
 **Ví dụ:**
 ```
 # Ghi nhớ thông tin sản phẩm
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "Đèn LED Rạng Đông SunLike" product 0.8
 
 # Tìm kiếm (dùng từ khóa ngắn)
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py search "đèn led" 5 balanced
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py search "đèn led" 5 balanced
 
 # Ghi nhớ API
-python /home/babyhack8x/.openclaw/workspace/skills/bm25_memory.py add "API key haravan" api 1.0
+python /home/babyhack8x/.openclaw/workspace/skills/baoan-memory.py add "API key haravan" api 1.0
 ```
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
