@@ -13,6 +13,7 @@ WATCH_FILES = [
     Path.home() / '.openclaw/agents/main/agent/models.json',
 ]
 POLL_SECONDS = 20
+DEBOUNCE_SECONDS = 90
 
 
 def file_state(path):
@@ -38,6 +39,8 @@ def save_state(state):
 
 def main():
     state = load_state()
+    pending_since = None
+    pending_state = None
     while True:
         changed = False
         new_state = {}
@@ -48,9 +51,19 @@ def main():
                 changed = True
 
         if changed:
+            pending_state = new_state
+            if pending_since is None:
+                pending_since = time.time()
+        elif pending_since is not None and (time.time() - pending_since) >= DEBOUNCE_SECONDS:
             subprocess.run([str(SYNC_SCRIPT), 'Auto-sync OpenClaw config backup'], check=True)
-            state = new_state
+            state = pending_state or new_state
+            state['_meta'] = {
+                'last_debounce_sync_at': time.time(),
+                'debounce_seconds': DEBOUNCE_SECONDS,
+            }
             save_state(state)
+            pending_since = None
+            pending_state = None
 
         time.sleep(POLL_SECONDS)
 

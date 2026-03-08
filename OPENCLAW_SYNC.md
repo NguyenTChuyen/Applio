@@ -36,6 +36,12 @@ Khi `~/.openclaw/openclaw.json` hoac `~/.openclaw/agents/main/agent/models.json`
 2. commit voi message `Auto-sync OpenClaw config backup`
 3. push len `origin/main`
 
+Watcher co debounce thong minh:
+
+- poll moi `20s`
+- cho config on dinh `90s` roi moi sync
+- giup tranh tao nhieu commit neu OpenClaw ghi file lien tuc trong mot dot thay doi
+
 Lenh kiem tra:
 
 ```bash
