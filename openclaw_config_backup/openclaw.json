@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.3.2",
-    "lastTouchedAt": "2026-03-07T14:18:58.449Z"
+    "lastTouchedVersion": "2026.3.8",
+    "lastTouchedAt": "2026-03-10T13:25:37.914Z"
   },
   "wizard": {
     "lastRunAt": "2026-03-07T13:48:47.836Z",
@@ -193,20 +193,20 @@
         "cliproxyapi/gpt-5.4": {}
       },
       "workspace": "/home/babyhack8x/.openclaw/workspace",
+      "bootstrapMaxChars": 15000,
+      "bootstrapTotalMaxChars": 50000,
       "compaction": {
         "reserveTokensFloor": 100000,
         "memoryFlush": {
           "enabled": false
         }
-      },
-      "bootstrapMaxChars": 15000,
-      "bootstrapTotalMaxChars": 50000
+      }
     },
     "list": [
       {
         "id": "main",
         "default": true,
-        "model": "cliproxyapi/gpt-5.4"
+        "model": "cliproxyapi/gpt-5.2-codex"
       },
       {
         "id": "Admin",
@@ -215,6 +215,112 @@
       {
         "id": "Staff",
         "model": "cliproxyapi/gpt-5.4"
+      },
+      {
+        "id": "taizi",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-taizi",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "zhongshu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-zhongshu",
+        "subagents": {
+          "allowAgents": [
+            "menxia",
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "menxia",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-menxia",
+        "subagents": {
+          "allowAgents": [
+            "shangshu",
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "shangshu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-shangshu",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu",
+            "menxia",
+            "hubu",
+            "libu",
+            "bingbu",
+            "xingbu",
+            "gongbu",
+            "libu_hr"
+          ]
+        }
+      },
+      {
+        "id": "hubu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-hubu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-libu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "bingbu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-bingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "xingbu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-xingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "gongbu",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-gongbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu_hr",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-libu_hr",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "zaochao",
+        "workspace": "/home/babyhack8x/.openclaw/workspace-zaochao",
+        "subagents": {
+          "allowAgents": []
+        }
       }
     ]
   },
