@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.13",
-    "lastTouchedAt": "2026-03-15T14:03:21.085Z"
+    "lastTouchedAt": "2026-03-15T14:09:11.528Z"
   },
   "wizard": {
     "lastRunAt": "2026-03-07T13:48:47.836Z",
@@ -332,7 +332,18 @@
       ]
     }
   },
-  "bindings": [],
+  "bindings": [
+    {
+      "agentId": "taizi",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "dm",
+          "id": "5742018098"
+        }
+      }
+    }
+  ],
   "commands": {
     "native": "auto",
     "nativeSkills": "auto",
